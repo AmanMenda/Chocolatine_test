@@ -1,4 +1,6 @@
 on: push
 
 jobs:
-  run: echo "test"
+  steps:
+    - name: display date
+      run: echo "test"
