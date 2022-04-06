@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - 'ga-ignore-'
+  pull_request:
+    branches-ignore:
+      - 'ga-ignore-'
+
+jobs:
+  check_repository_cleanliness:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Unwanted file detected
+        if: |
+          startsWith(searchString, '#') && endsWith(searchString, '#') ||
+          endsWith(searchString, '~') ||
+          contains(github.event.issue.labels.*.name, 'pain_au_chocolat')
+          endsWith(searchString, '.o') ||
+          endsWith(searchString, '.a') ||
+          endsWith(searchString, '.so') ||
+          endsWith(searchString, '.gcno') ||
+          endsWith(searchString, '.gcda') ||
+          startsWith(searchString, 'tmp/')
+        run: exit 1
