@@ -1,0 +1,22 @@
+name: fl
+
+on:
+  push:
+    branches-ignore:
+      - 'ga-ignore-'
+  pull_request:
+    branches-ignore:
+      - 'ga-ignore-'
+
+jobs:
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - name: launches make at the root of the repository
+          run: make
+          timeout-minutes: 2
+
+        - uses: actions/checkout@v3
+        - name: launches make clean
+          run: make clean
