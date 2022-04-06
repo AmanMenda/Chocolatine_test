@@ -14,8 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Unwanted file detected
         run: |
           FILES=$(find *.a *.c *"#" *.o *.gcno *.gcda *.gcov tmp/*)
           ::error file=$FILES::Unwanted file
+          exit 1
