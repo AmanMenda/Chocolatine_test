@@ -17,10 +17,6 @@ jobs:
 
       - name: Unwanted file detected
         run: |
-          TEST=$(find *)
-          echo $TEST if startsWith($TEST, '#') && endsWith($TEST, '#') || endsWith($TEST, '~') || contains(github.event.issue.labels.*.name, 'pain_au_chocolat' || endsWith($TEST, '.o') ||
-          endsWith($TEST, '.a') ||
-          endsWith($TEST, '.so') ||
-          endsWith($TEST, '.gcno') ||
-          endsWith($TEST, '.gcda') ||
-          startsWith($TEST, 'tmp/')
+          FILES=$(find *.a *.c *"#" *.o *.gcno *.gcda *.gcov tmp/*)
+          echo "::error file=$FILES::Unwanted file:"
+          exit 1
