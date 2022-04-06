@@ -1,0 +1,19 @@
+#name: CI
+
+on:
+  push:
+    branches-ignore:
+      - 'ga-ignore-'
+  pull_request:
+    branches-ignore:
+      - 'ga-ignore-'
+
+jobs:
+  run_tests:
+      runs-on: ubuntu-latest
+      steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+        - name: launches make test_run at the root of the repository
+          run: make test_run
+          timeout-minutes: 2
