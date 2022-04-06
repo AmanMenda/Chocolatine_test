@@ -18,5 +18,5 @@ jobs:
       - name: Unwanted file detected
         run: |
           FILES=$(find *.a *.c *"#" *.o *.gcno *.gcda *.gcov tmp/*)
-          echo "::error file=$FILES::Unwanted file:"
+          ::error file=$FILES::Unwanted file
           exit 1
