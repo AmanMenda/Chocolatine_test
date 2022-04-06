@@ -16,14 +16,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Unwanted file detected
-        if: |
-          startsWith(searchString, '#') && endsWith(searchString, '#') ||
-          endsWith(searchString, '~') ||
-          contains(github.event.issue.labels.*.name, 'pain_au_chocolat')
-          endsWith(searchString, '.o') ||
-          endsWith(searchString, '.a') ||
-          endsWith(searchString, '.so') ||
-          endsWith(searchString, '.gcno') ||
-          endsWith(searchString, '.gcda') ||
-          startsWith(searchString, 'tmp/')
-        run: exit 1
+        run: |
+          TEST=$(find *)
+          echo $TEST if startsWith($TEST, '#') && endsWith($TEST, '#') || endsWith($TEST, '~') || contains(github.event.issue.labels.*.name, 'pain_au_chocolat' || endsWith($TEST, '.o') ||
+          endsWith($TEST, '.a') ||
+          endsWith($TEST, '.so') ||
+          endsWith($TEST, '.gcno') ||
+          endsWith($TEST, '.gcda') ||
+          startsWith($TEST, 'tmp/')
