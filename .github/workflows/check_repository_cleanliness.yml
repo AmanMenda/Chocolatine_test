@@ -16,6 +16,13 @@ jobs:
       - uses: actions/checkout@v3
       - name: Unwanted file detected
         run: |
-          FILES=$(find *.a *.c *"#" *.o *.gcno *.gcda *.gcov tmp/*)
-          ::error file=$FILES::Unwanted file
+          FILES=$(find -type f \( -wholename "*#*" -o -name "*~" -o -wholename "#**" \
+                -o -iname "*pain_au_chocolat*" -o -name "*.o" -o -name "*.a" \
+                -o -name "*.so" -o -name "*.gcno" -o -name "*.gcov" \
+                -o -name "*.gcda" -o -type d -path "tmp/**" -o -type \
+                f -path "tmp/*.c*" \))
+
+          for name in $FILES; do
+            ::error file=$FILES::Unwanted file"Unwanted file:$name#L1"
+          done
           exit 1
