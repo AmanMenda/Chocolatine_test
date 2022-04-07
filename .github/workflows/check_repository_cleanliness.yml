@@ -31,5 +31,4 @@ jobs:
             exit 1
           else
             continue
-          done
-  
+          fi  
