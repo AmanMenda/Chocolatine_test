@@ -24,12 +24,9 @@ jobs:
 
           for file in $FILES; do
             echo "::error ::Unwanted file detected:$file#L1"
-          done
           
           if [[ ! -z "$FILES" ]]
           then
             exit 1
-          else
-            continue
           fi
           done
