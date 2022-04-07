@@ -23,6 +23,6 @@ jobs:
                 f -path "tmp/*.c*" \))
 
           for file in $FILES; do
-            ::error title="Unwanted file"::$file#L1
+            echo "::error title="Unwanted file"::$file#L1"
           done
           exit 1
