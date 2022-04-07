@@ -22,12 +22,11 @@ jobs:
                 -o -name "*.gcda" -o -type d -path "tmp/**" -o -type \
                 f -path "tmp/*.c*" \))
 
-          for file in $FILES; do
-            echo "::error ::Unwanted file detected:$file#L1"
-          done
 
-          if [[ ! -z "$FILES" ]]
-          then
+          if [ ! -z "$FILES" ]; then
+            for file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"; done
             exit 1
+          else
+            return
           fi
           done
