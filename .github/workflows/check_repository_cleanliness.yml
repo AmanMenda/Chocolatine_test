@@ -27,6 +27,9 @@ jobs:
             for file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"; done
             exit 1
           else
-            return
+            :
           fi
           done
+      - name: if program still running
+        if: ${{ success() }}
+        run: echo "Success"
