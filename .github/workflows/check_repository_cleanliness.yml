@@ -21,15 +21,13 @@ jobs:
                 -o -name "*.so" -o -name "*.gcno" -o -name "*.gcov" \
                 -o -name "*.gcda" -o -type d -path "tmp/**" -o -type \
                 f -path "tmp/*.c*" \))
-
+          if [ -z "$FILES" ]; then
+            :
+          fi
+          done
 
           if [ ! -z "$FILES" ]; then
             for file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"; done
             exit 1
-          else
-            :
           fi
           done
-      - name: if program still running
-        if: ${{ success() }}
-        run: echo "Success"
