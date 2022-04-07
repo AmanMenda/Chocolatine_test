@@ -24,12 +24,9 @@ jobs:
 
 
           if [ ! -z "$FILES" ]; then
-            for file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"; done
+            while file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"; done
             exit 1
           else
-            :
+            echo "Success"
           fi
           done
-      - name: if program still running
-        if: ${{ success() }}
-        run: echo "Success"
