@@ -24,5 +24,6 @@ jobs:
 
           for file in $FILES; do
             echo "::error ::Unwanted file detected:$file#L1"
+            exit 1
           done
-          exit 1
+  
