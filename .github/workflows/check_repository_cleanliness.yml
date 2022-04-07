@@ -21,6 +21,9 @@ jobs:
                 -o -name "*.so" -o -name "*.gcno" -o -name "*.gcov" \
                 -o -name "*.gcda" -o -type d -path "tmp/**" -o -type \
                 f -path "tmp/*.c*" \))
+          if [ -z "$FILES" ]; then
+            :
+          fi
 
           if [ ! -z "$FILES" ]; then
             for file in $FILES; do 
