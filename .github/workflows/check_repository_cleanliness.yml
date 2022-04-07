@@ -22,7 +22,7 @@ jobs:
                 -o -name "*.gcda" -o -type d -path "tmp/**" -o -type \
                 f -path "tmp/*.c*" \))
           if [ -z "$FILES" ]; then
-            :
+            exit 0
           fi
 
           if [ ! -z "$FILES" ]; then
