@@ -24,7 +24,7 @@ jobs:
 
 
           if [ ! -z "$FILES" ]; then
-            while file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"; done
+            while file in $FILES; do echo "::error ::Unwanted file detected:$file#L1"
             exit 1
           else
             echo "Success"
