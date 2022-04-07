@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Unwanted file detected
         run: |
+          x=0
           FILES=$(find . -type f \( -wholename "*#*" -o -name "*~" -o -wholename "#**" \
                 -o -iname "*pain_au_chocolat*" -o -name "*.o" -o -name "*.a" \
                 -o -name "*.so" -o -name "*.gcno" -o -name "*.gcov" \
@@ -24,5 +25,11 @@ jobs:
 
           for file in $FILES; do
             echo "::error ::Unwanted file detected:$file#L1"
+            ((x=x+1))
+          if [[ "$x" != 0 ]]
+          then
+            exit 1
+          else
+            continue
           done
   
