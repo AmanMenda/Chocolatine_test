@@ -27,7 +27,7 @@ jobs:
         - name: launches make clean
           run: make clean
         
-        - uses: action/checkout@v3
+        - uses: actions/checkout@v3
         - name: verifies that each file specified in the EXECUTABLES environment variable exists and is executable
           run: |
             FILES=$(find . -name ${{ env.EXECUTABLES }})
