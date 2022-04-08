@@ -8,6 +8,10 @@ on:
     branches-ignore:
       - 'ga-ignore-*'
 
+env:
+  MIRROR_URL: https://github.com/AmanMenda/Chocolatine_test.git
+  EXECUTABLES: "pushswap"
+
 jobs:
   check_repository_cleanliness:
     runs-on: ubuntu-latest
@@ -32,3 +36,29 @@ jobs:
             exit 1
           fi
           done
+          
+  check_program_compilation:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    needs: [check_repository_cleanliness]
+    steps:
+        - uses: actions/checkout@v3
+        - name: launches make at the root of the repository
+          run: make
+          timeout-minutes: 2
+
+        - uses: actions/checkout@v3
+        - name: launches make clean
+          run: make clean
+        
+        - uses: actions/checkout@v3
+        - name: verifies that each file specified in the EXECUTABLES environment variable exists and is executable
+          run: |
+            FILES=$(find . -name "${{ env.EXECUTABLES }}")
+            if [[ ! -z $FILES && -x $FILES ]]; then
+              exit 0
+            else
+              exit 1
+            fi
+            done
