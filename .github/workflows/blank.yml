@@ -14,7 +14,7 @@ env:
 
 jobs:
   check_program_compilation:
-    runs-on: epitechcontent/epitest-docker:latest
+    runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v3
         - name: launches make at the root of the repository
