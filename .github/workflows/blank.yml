@@ -30,7 +30,7 @@ jobs:
         - uses: actions/checkout@v3
         - name: verifies that each file specified in the EXECUTABLES environment variable exists and is executable
           run: |
-            FILES=$(find . -name ${{ env.EXECUTABLES }})
+            FILES=$(find . -name "$EXECUTABLES")
             if [ ! -z $FILES && -x $FILES ]; then
               exit 0
             else
