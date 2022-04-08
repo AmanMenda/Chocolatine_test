@@ -8,6 +8,10 @@ on:
     branches-ignore:
       - 'ga-ignore-**'
 
+env:
+  MIRROR_URL: https://github.com/AmanMenda/Chocolatine_test.git
+  EXECUTABLES: pushswap
+
 jobs:
   check_program_compilation:
     runs-on: ubuntu-latest
@@ -22,3 +26,14 @@ jobs:
         - uses: actions/checkout@v3
         - name: launches make clean
           run: make clean
+        
+        - uses: action/checkout@v3
+        - name: verifies that each file specified in the EXECUTABLES environment variable exists and is executable
+          run: |
+            FILES=$(find . -name ${{ env.EXECUTABLES }})
+            if [ ! -z $FILES && -x $FILES ]; then
+              exit 0
+            else
+              exit 1
+            fi
+            done
