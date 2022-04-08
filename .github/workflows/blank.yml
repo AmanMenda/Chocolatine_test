@@ -1,16 +1,18 @@
-name: fl
+name: CI
 
 on:
   push:
     branches-ignore:
-      - 'ga-ignore-'
+      - 'ga-ignore-**'
   pull_request:
     branches-ignore:
-      - 'ga-ignore-'
+      - 'ga-ignore-**'
 
 jobs:
   check_program_compilation:
     runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
     steps:
         - uses: actions/checkout@v3
         - name: launches make at the root of the repository
