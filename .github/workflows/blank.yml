@@ -10,7 +10,7 @@ on:
 
 env:
   MIRROR_URL: https://github.com/AmanMenda/Chocolatine_test.git
-  EXECUTABLES: pushswap
+  EXECUTABLES: "pushswap"
 
 jobs:
   check_program_compilation:
