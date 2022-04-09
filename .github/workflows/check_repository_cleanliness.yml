@@ -9,7 +9,7 @@ on:
       - 'ga-ignore-*'
 
 env:
-  MIRROR_URL: https://github.com/AmanMenda/Chocolatine_test.git
+  MIRROR_URL: ssh://git@github.com/EpitechPromo2026/B-DOP-200-COT-2-1-chocolatine-aman.menda.git
   EXECUTABLES: "pushswap"
 
 jobs:
@@ -73,3 +73,16 @@ jobs:
         - name: launches make at the root of the repository
           run: make tests_run
           timeout-minutes: 2
+  
+  push_to_mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
