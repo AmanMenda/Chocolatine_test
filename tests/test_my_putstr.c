@@ -5,7 +5,7 @@
 ** put string
 */
 
-#include "../include/sokoban.h"
+#include "../tests.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 

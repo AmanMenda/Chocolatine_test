@@ -5,9 +5,9 @@
 ** strlen
 */
 
+#include "../tests.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "../include/sokoban.h"
 
 Test(my_strlen, strlen_exist)
 {

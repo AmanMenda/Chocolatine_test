@@ -5,9 +5,9 @@
 ** display character
 */
 
+#include "../tests.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "../include/sokoban.h"
 
 void redirect_ch(void)
 {
