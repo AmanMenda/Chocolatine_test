@@ -8,9 +8,19 @@ on:
     branches-ignore:
       - 'ga-ignore-**'
 
+env:
+  MIRROR_URL: ssh://git@github.com/EpitechPromo2026/B-DOP-200-COT-2-1-chocolatine-aman.menda.git
+  
 jobs:
   push_to_mirror:
     runs-on: ubuntu-latest
     steps:
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
