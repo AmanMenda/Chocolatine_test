@@ -9,7 +9,7 @@ on:
       - 'ga-ignore-*'
 
 env:
-  MIRROR_URL: "git@github.com:AmanMenda/AmanMenda.github.io.git"
+  MIRROR_URL: "git@github.com:AmanMenda/Test.git"
   EXECUTABLES: "pushswap"
 
 jobs:
