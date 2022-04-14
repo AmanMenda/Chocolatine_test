@@ -85,6 +85,6 @@ jobs:
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
           target_repo_url:
-             "git@github.com:AmanMenda/Test.git"
+            "git@github.com:AmanMenda/Test.git"
           ssh_private_key:
             ${{ secrets.GIT_SSH_PRIVATE_KEY }}
