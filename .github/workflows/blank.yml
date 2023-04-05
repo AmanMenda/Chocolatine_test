@@ -1,39 +1,73 @@
-name: CI
+name: My Chocolatine
 
 on:
   push:
     branches-ignore:
-      - 'ga-ignore-**'
+      - 'ga-ignore-*'
   pull_request:
-    branches-ignore:
+    branches-ignore :
       - 'ga-ignore-**'
 
 env:
-  MIRROR_URL: https://github.com/AmanMenda/Chocolatine_test.git
-  EXECUTABLES: "pushswap"
+  EXECUTABLES: ""
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+  check_coding_style:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Check coding style
+        run: check.sh $(pwd) $(pwd)
+      - name: Display errors
+        if: ${{ failure() }}
+        run: cat coding-style-errors.txt
+
   check_program_compilation:
     runs-on: ubuntu-latest
     container:
-      image: epitechcontent/epitest-docker
+      image: epitechcontent/epitest-docker    
+    timeout-minutes: 2
     steps:
-        - uses: actions/checkout@v3
-        - name: launches make at the root of the repository
-          run: make
-          timeout-minutes: 2
-
-        - uses: actions/checkout@v3
-        - name: launches make clean
-          run: make clean
-        
-        - uses: actions/checkout@v3
-        - name: verifies that each file specified in the EXECUTABLES environment variable exists and is executable
-          run: |
-            FILES=$(find . -name "${{ env.EXECUTABLES }}")
-            if [[ ! -z $FILES && -x $FILES ]]; then
-              exit 0
-            else
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Check program compilation
+        run: |
+          make
+          make clean
+      - name: Check executables
+        run: |
+          for executable in $EXECUTABLES; do
+            if [ ! -x "$executable" ]; then
+              echo "Error: $executable not found or not executable"
               exit 1
             fi
-            done
+          done
+
+  run_tests:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    timeout-minutes: 2
+    needs: check_program_compilation
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Run tests
+        run: make tests_run
