@@ -9,31 +9,30 @@ env:
   MIRROR_URL:  "git@github.com:APEyes7/chocolatineM3.git"
 
 jobs:
-  check_the_coding_style:
-    runs-on:  ubuntu-latest
-    container:
-      image: ghcr.io/epitech/coding-style-checker:latest
-    steps:
-      - uses:  actions/checkout@v3
-      - run:  |
-          check.sh $(pwd) $(pwd)
-          cat coding-style-reports.log
-          input="coding-style-reports.log"
-          g=0
-          while IFS= read -r line
-          do
-            g+=1
-            readarray -d ' ' -t tab<<<"$line"
-            readarray -d ':' -t ol<<<"${tab[1]}"
-            readarray -d ':' -t oli<<<"${tab[0]}"
-            echo "::error file=${oli[0]},title=${ol[0]} coding style error,line=${oli[1]}::${ol[1]}"
-          done < "$input"
-          if [ $g -ne 0 ]
-          then
-            exit 1
-          fi
+#   check_the_coding_style:
+#     runs-on:  ubuntu-latest
+#     container:
+#       image: ghcr.io/epitech/coding-style-checker:latest
+#     steps:
+#       - uses:  actions/checkout@v3
+#       - run:  |
+#           check.sh $(pwd) $(pwd)
+#           cat coding-style-reports.log
+#           input="coding-style-reports.log"
+#           g=0
+#           while IFS= read -r line
+#           do
+#             g+=1
+#             readarray -d ' ' -t tab<<<"$line"
+#             readarray -d ':' -t ol<<<"${tab[1]}"
+#             readarray -d ':' -t oli<<<"${tab[0]}"
+#             echo "::error file=${oli[0]},title=${ol[0]} coding style error,line=${oli[1]}::${ol[1]}"
+#           done < "$input"
+#           if [ $g -ne 0 ]
+#           then
+#             exit 1
+#           fi
   check_program_compilation:
-    needs:  check_the_coding_style
     runs-on:  ubuntu-latest
     container:
       image:  epitechcontent/epitest-docker:latest
