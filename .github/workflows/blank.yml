@@ -1,58 +1,46 @@
-name: choco
-
-on:
-  push:
-  pull_request:
-    branches-ignore:
-      - 'ga-ignore-*'
-      
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+env:
+  EXECUTABLES: yo
+  MIRROR_URL: ya
 jobs:
-  check:
-    runs-on:  ubuntu-latest
-    steps:
-      - name: check_branch_name
-        uses: actions/checkout@v2
-      - run: echo name is $GITHUB_REF
-  
   check_coding_style:
-    runs-on: ubuntu-lastest
-    container:
-      image: ghcr.io/epitech/coding-style-checker:latest
+    runs-on: ubuntu-latest
+    container: ghcr.io/epitech/coding-style-checker:latest
     steps:
-     - name: ckeck-coding-style
-       uses: actions/checkout@v3
-     - run: |
-        check.sh $(pwd) $(pwd)
-        cat coding-style-reports.log
-        if [[ -s $coding-style-report.log ]]
-        then
-          exit 0
-        else
-          i=1
-          while read -r line
-          do
-          tab=( ${line//:/})
-          echo "::error::file=${tab[0]}, line=${tab[1]}, ::${tab[2]} coding style error: ${tab[0]}#L${tab[1]}"
-            ((i++))
-            done < "coding-style-reports.log"
-          exit 1
-        fi
-        
+      - name: Check coding style
+        uses: actions/checkout@v3
+      - run: |
+          check.sh $(pwd) $(pwd)
+          if [ -s $coding-style-reports.log ]
+          then
+            exit 0
+          else
+            while read line
+            do
+               tab=(${line//:/ })
+               ya=(${tab[0]})
+               tob=(${ya//// })
+               echo "::error title=${tab[2]} coding style error: ${tob[1]}#L${tab[1]}::${tab[3]}"
+            done < coding-style-reports.log
+            exit 1
+          fi
   check_program_compilation:
     runs-on: ubuntu-latest
-    container:
-      image: epitechcontent/epitest-docker
+    container: epitechcontent/epitest-docker
     steps:
-      - name: chek_program_compilation
-        uses: actions/checkout@v2
-      - run: make
-      - run: make clean
-      
-  check_unit:
-    runs-on: ubuntu-lastest
-    container:
-      image: epitechcontent/epitest-docker
-    steps:
-      - name: run_tests
-        uses: actions/checkout@v2
-      - run: make test_run
+      - name: check compilation
+        uses: actions/checkout@v3
+      - run: |
+          make
+          make clean
+          ls > oyoy
+          while read line
+          do
+            if [ "$line" = "$EXECUTABLES" ]
+            then
+              exit 0
+            fi
+          done < oyoy
+          exit 1
