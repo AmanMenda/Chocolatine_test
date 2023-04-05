@@ -5,11 +5,9 @@
 ## Makefile
 ##
 
-SRC	=	my_strlen.c \
-		my_putstr.c
+SRC	=	my_putstr.c
 
-TEST_SRC	=	my_strlen.c \
-			my_putstr.c \
+TEST_SRC	=	my_putstr.c \
 			tests/test_my_strlen.c \
 			tests/test_my_putstr.c \
 			tests/test_my_putchar.c
