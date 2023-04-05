@@ -1,73 +1,68 @@
-name: My Chocolatine
-
 on:
   push:
     branches-ignore:
-      - 'ga-ignore-*'
-  pull_request:
-    branches-ignore :
       - 'ga-ignore-**'
-
+  workflow_dispatch:
+  pull_request:
 env:
-  EXECUTABLES: ""
+  EXECUTABLES:  ""
+  MIRROR_URL:  ""
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-
-  check_coding_style:
-    runs-on: ubuntu-latest
+  check_the_coding_style:
+    runs-on:  ubuntu-latest
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-      - name: Check coding style
-        run: check.sh $(pwd) $(pwd)
-      - name: Display errors
-        if: ${{ failure() }}
-        run: cat coding-style-errors.txt
-
+      - uses:  actions/checkout@v3
+      - run:  |
+          check.sh $(pwd) $(pwd)
+          cat coding-style-reports.log
+          input="coding-style-reports.log"
+          g=0
+          while IFS= read -r line
+          do
+            g+=1
+            readarray -d ' ' -t tab<<<"$line"
+            readarray -d ':' -t ol<<<"${tab[1]}"
+            readarray -d ':' -t oli<<<"${tab[0]}"
+            echo "::error file=${oli[0]},title=${ol[0]} coding style error,line=${oli[1]}::${ol[1]}"
+          done < "$input"
+          if [ $g -ne 0 ]
+          then
+            exit 1
+          fi
   check_program_compilation:
-    runs-on: ubuntu-latest
+    needs:  check_the_coding_style
+    runs-on:  ubuntu-latest
     container:
-      image: epitechcontent/epitest-docker    
-    timeout-minutes: 2
+      image:  epitechcontent/epitest-docker:latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-      - name: Check program compilation
-        run: |
-          make
-          make clean
-      - name: Check executables
-        run: |
-          for executable in $EXECUTABLES; do
-            if [ ! -x "$executable" ]; then
-              echo "Error: $executable not found or not executable"
-              exit 1
-            fi
-          done
-
+      - uses:  actions/checkout@v3
+      - run: ls -l
+      - run:  make
+      - run:  make clean
+      - run:  |
+          if ! test -fx ${EXECUTABLES}
+          then
+            exit 1
+          fi
   run_tests:
-    runs-on: ubuntu-latest
+    needs:  check_program_compilation
+    runs-on:  ubuntu-latest
     container:
-      image: epitechcontent/epitest-docker
-    timeout-minutes: 2
-    needs: check_program_compilation
+      image:  epitechcontent/epitest-docker:latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - run:  |
+          echo "tests_run:" >> Makefile
+      - run:  make tests_run
+  push_to_mirror:
+    runs-on:  ubuntu-latest
+    needs:  run_tests
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pixta-dev/repository-mirroring-action@v1
         with:
-          ref: ${{ github.head_ref }}
-      - name: Run tests
-        run: make tests_run
+          target_repo_url:  ${MIRROR_URL}
+          ssh-private-key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
