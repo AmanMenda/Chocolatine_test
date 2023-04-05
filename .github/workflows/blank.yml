@@ -6,7 +6,7 @@ on:
   pull_request:
 env:
   EXECUTABLES:  ""
-  MIRROR_URL:  git@github.com:APEyes7/chocolatineM3.git
+  MIRROR_URL:  "git@github.com:APEyes7/chocolatineM3.git"
 
 jobs:
 #   check_the_coding_style:
