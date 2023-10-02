@@ -1,0 +1,15 @@
+name: test
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Simple update 
+        run: sudo apt-get upgrade -y
