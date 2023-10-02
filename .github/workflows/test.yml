@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Simple update 
-        run: sudo apt-get updade -y
+        run: sudo apt-get update -y
