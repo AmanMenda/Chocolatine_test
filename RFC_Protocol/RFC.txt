@@ -1,0 +1,35 @@
+                                                        Stella AGBADJAGAN
+                                                        Lucia CODJIA
+Ze First Dance                                          Aman MENDA
+                                                        Sofourath AGNILA
+                                                        Linerol TCHECOUNNOU
+
+Request for Comments: 4545                              Independent
+Category: Standards Track
+                                                                        
+                                                        September 2023
+
+
+                               R-TYPE's PROTOCOL                               
+
+Abstract
+
+    This document will serve to explain from top to bottom how the exchanges
+between the server and the clients for the design and creation of the R-TYPE
+multiplayer game. It will more particularly describe the binary protocol
+which will be transmitted between the server and the client and how it will
+be transmitted. It will allow therefore to anyone who would like to know how
+the game of understand quite easily how it works.
+
+Copyright Notice
+
+    Copyright (c) 2023 IETF Trust and the persons identified as the
+document authors.  All rights reserved.
+
+Table of Contents
+    1. Introduction
+    2. Requirements Language (RFC 2119)
+    3. Connexion's process
+    4. Client's Requests
+    5. Server's Responses
+    6. 

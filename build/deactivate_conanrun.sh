@@ -1,0 +1,1 @@
+. "/home/aman/B-CPP-500-COT-5-1-rtype-aman.menda/build/deactivate_conanrunenv-release-x86_64.sh"

@@ -1,0 +1,33 @@
+site_name: R-Type's web documentation
+repo_url: https://github.com/EpitechPromo2026/B-CPP-500-COT-5-1-rtype-aman.menda.git
+site_description: "R-Type's web documentation"
+site_author: Ze first dance
+
+theme:
+    name: readthedocs
+    colorscheme: github
+    shortcuts:
+        next: 78
+        previous: 80
+        search: 83
+
+nav:
+    - HOME: index.md
+    - ABOUT R-TYPE:
+        - What's R-Type: about_r-type/description_of_r-type.md
+        - How to play ?: about_r-type/how_to_play.md
+    - Dependencies & Project Compilation:
+        - Conan: conan.md
+        - Run the project: run-the-project.md
+    - Main systems overviews:
+        - Main systems description: main-systems-overview.md
+        - How they are used in the project: systems-usage.md
+    # - ABOUT US:
+    #     - Who we are:
+    #     - Contribution guideline:
+
+markdown_extensions:
+    - toc:
+        baselevel: 2
+
+copyright: Promo 2026 - ZeFirstDance

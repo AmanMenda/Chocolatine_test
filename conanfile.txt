@@ -1,0 +1,12 @@
+[requires]
+boost/1.83.0
+fmt/10.1.1
+sfml/2.6.0
+asio/1.28.1
+
+[tool_requires]
+cmake/3.27.5
+
+[generators]
+CMakeDeps
+CMakeToolchain

@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/home/linerol/B-CPP-500-COT-5-1-rtype-aman.menda/build/CMakePresets.json"
+    ]
+}

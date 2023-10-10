@@ -1,0 +1,4 @@
+/home/aman/B-CPP-500-COT-5-1-rtype-aman.menda/build/CMakeFiles/r-type_server.dir
+/home/aman/B-CPP-500-COT-5-1-rtype-aman.menda/build/CMakeFiles/r-type_client.dir
+/home/aman/B-CPP-500-COT-5-1-rtype-aman.menda/build/CMakeFiles/edit_cache.dir
+/home/aman/B-CPP-500-COT-5-1-rtype-aman.menda/build/CMakeFiles/rebuild_cache.dir

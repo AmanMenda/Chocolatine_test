@@ -1,0 +1,1 @@
+g++ main.cpp Maths/Vector2D.cpp Systems/RenderSystem.cpp Systems/ControllableSystem.cpp -std=c++20 -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system -g3
