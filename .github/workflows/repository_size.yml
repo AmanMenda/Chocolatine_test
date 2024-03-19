@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo "${{github.branch.head_ref}}"
+          echo "${{ github.head_ref }}"
           du -skh --exclude=".git"
