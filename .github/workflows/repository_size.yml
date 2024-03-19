@@ -1,0 +1,12 @@
+name: Display repository size
+
+on: [ push ]
+
+jobs:
+  get-repository-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo ${{ github.branch.base.ref }}
+          du -skh --exclude=".git"
