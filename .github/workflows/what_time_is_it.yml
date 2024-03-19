@@ -1,0 +1,9 @@
+name: Date script
+
+on: [ push ]
+
+jobs:
+  Run-Date-After-Each-Push:
+    runs-on: ubuntu-latest
+    steps:
+      - run: date
