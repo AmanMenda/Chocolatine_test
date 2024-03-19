@@ -7,6 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          echo "${{ github.head_ref }}"
-          du -skh --exclude=".git"
+      - run: echo "${{ github.ref }}"
+      - run: du -skh --exclude=".git"
