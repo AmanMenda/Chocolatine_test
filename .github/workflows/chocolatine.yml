@@ -1,0 +1,31 @@
+name: Chocolatine by OF_Jaggernaut
+
+on:
+  push:
+    branches-ignore:
+      - "ga-ignore-*"
+  pull_request:
+    branches-ignore:
+      - "ga-ignore-*"
+
+env:
+  MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-1-chocolatine-farouk.okanla.git"
+  EXECUTABLES: "binary"
+
+jobs:
+  push_to_mirror:
+    runs-on: ubuntu-latest
+    #needs: run_tests
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Mirroring
+      uses: pixta-dev/repository-mirroring-action@v1
+      with:
+        target_repo_url:
+          ${{ env.MIRROR_URL }}
+        ssh_private_key:
+          ${{ secrets.GIT_SSH_PRIVATE_KEY }}
